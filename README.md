@@ -1,3 +1,37 @@
+.pluck 
+ActiveRecord::Relation 
+.limit
+.offset
+.or 
+.sort
+.reverse 
+classifications
+includes 
+
+asc
+desc
+
+
+
+The methods are chainable 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Optimal Queries using Active Record
 
 ## Learning Goals
