@@ -1,19 +1,69 @@
-.pluck 
-ActiveRecord::Relation 
+`.pluck`
+Used to query single or multiple columns from the underlying table of a model. It accepts a list of column names as an argument and returns an array of values of the specified columns with the corresponding datatype. This returns an array. Not an ARR.  
+ 
+`.distinct`
+Used to prevent duplicates
+ 
+ActiveRecord::Relation
 .limit
 .offset
-.or 
+.or
 .sort
-.reverse 
+.reverse
 classifications
-includes 
-
+includes
+ 
 asc
 desc
+ 
+`ActiveRecord Query Interface Rails Guide`  
+The methods are chainable
+ 
+
+Know:
+ActiveRecord Associations 
+Request Response Cycle
+Implement a Feature
+Make Changes/Adding Feature in an application via Multiple Layers (MVC, Routes, etc.)
+ 
+Forms
+Partials
+Nested Resources
+Scope Methods
+Review Requirements
+ 
+`Tricky Requirements:` 
+user_submittable attributes on the join model
+nested resources
+scope methods (this lesson?)
+ 
+`.limit` `.offset`
+We use limit to specify the number of records to be retrieved, and use offset to specify the number of records to skip before starting to return the records.
+Client.limit(5)  Returns the first 5 in the table
+SELECT * FROM clients LIMIT 5
+ 
+`This returns 31, 32, 33, 34, and 35`
+Client.limit(5).offset(30)
+SELECT * FROM clients LIMIT 5 OFFSET 30
+ 
+This is used with pagination (how many per page)
+
+
+`2.5 OR Conditions`
+OR conditions between two relations can be built by calling or on the first relation, and passing the second one as an argument.
+
+Client.where(locked: true).or(Client.where(orders_count: [1,3,5]))
+SELECT * FROM clients WHERE (clients.locked = 1 OR clients.orders_count IN (1,3,5))
+
+
+`Scope`
+This is used to outline conditions that we want. 
+Refers to what you have access to and where you have it
+Scope Methods in a Model
+refers to which model objects meet these conditions
 
 
 
-The methods are chainable 
 
 
 
@@ -24,6 +74,30 @@ The methods are chainable
 
 
 
+
+
+
+# Boat.first_five can't be an array it has to be something that still has a connection to AR   
+
+
+
+
+
+
+
+
+collection<<(object, …)
+Adds one or more objects to the collection by setting their foreign keys to the collection’s primary key. Note that this operation instantly fires update SQL without waiting for the save or update call on the parent object, unless the parent object is a new record. This will also run validations and callbacks of associated object(s). 
+
+
+Storing foreign keys is how we establish associations?? 
+
+
+Regarding Project
+We need to create a has many through relationship (many to many)
+Where the join model has a user submittable attribute on it
+We need to be able to take user submittable data and put it in the join table 
+ 
 
 
 
